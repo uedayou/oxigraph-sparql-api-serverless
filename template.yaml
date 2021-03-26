@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Oxigraph Server AWS Serverless
+Transform: AWS::Serverless-2016-10-31
+Globals:
+  Function:
+    Timeout: 30
+  Api:
+    OpenApiVersion: 3.0.2
+    Cors:
+      AllowMethods: "'OPTIONS,POST,GET'"
+      AllowHeaders: "'Origin, Authorization, Accept, Content-Type'"
+      AllowOrigin: "'*'"
+
+Resources:
+  OxigraphServerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-lambda-function
+      Description: Oxigraph Lambda Function
+      CodeUri: lambda.zip
+      Runtime: provided.al2
+      Handler: bootstrap.is.real.handler
+      MemorySize: 1024
+      Events:
+        api:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: GET
+
+Outputs:
+  OxigraphServerApi:
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  OxigraphServerFunction:
+    Value: !GetAtt OxigraphServerFunction.Arn
+  OxigraphServerFunctionIamRole:
+    Value: !GetAtt OxigraphServerFunctionRole.Arn

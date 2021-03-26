@@ -1,0 +1,3 @@
+[submodule "lib/oxigraph"]
+	path = lib/oxigraph
+	url = https://github.com/uedayou/oxigraph.git

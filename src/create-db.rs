@@ -19,7 +19,7 @@ fn main() -> Result<(), Box<dyn Error>> {
   let mut results = Vec::new();
   let query = "SELECT (count(?s) as ?count) WHERE { ?s ?p ?o } limit 10";
   store.query(
-  	query
+    query
   )?.write(
     &mut results,
     oxigraph::sparql::QueryResultsFormat::Json

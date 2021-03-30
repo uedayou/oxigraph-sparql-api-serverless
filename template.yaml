@@ -21,12 +21,15 @@ Resources:
       Runtime: provided.al2
       Handler: bootstrap.is.real.handler
       MemorySize: 1024
+      Environment:
+        Variables:
+          RUST_BACKTRACE: 1
       Events:
         api:
           Type: Api
           Properties:
-            Path: /{proxy+}
-            Method: GET
+            Path: /sparql
+            Method: any
 
 Outputs:
   OxigraphServerApi:

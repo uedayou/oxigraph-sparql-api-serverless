@@ -5,6 +5,8 @@ This is the rust program which can deploy it as Web API(SPARQL Endpoint) using [
 ## Build using Docker
 
 ```
+$ git clone https://github.com/uedayou/oxigraph-sparql-api-serverless.git --recursive
+$ cd oxigraph-sparql-api-serverless
 $ cp YOUR_TURTLE_FILE_PATH rdf/dump.ttl 
 $ docker image build -t oxigraph-build -f Dockerfile.build .
 $ docker container run --rm -v $PWD:/code -v $HOME/.cargo/registry:/root/.cargo/registry -v $HOME/.cargo/git:/root/.cargo/git oxigraph-build

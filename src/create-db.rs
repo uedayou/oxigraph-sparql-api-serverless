@@ -9,7 +9,8 @@ fn main() -> Result<(), Box<dyn Error>> {
   let args: Vec<String> = std::env::args().collect();
   let filename = if args.get(1) != None { &args[1] } else { config::FILENAME };
   println!("{}", &filename);
-  let dbname = config::DBNAME;
+  let dbname = if args.get(2) != None { &args[2] } else { config::DBNAME };
+  println!("{}", &dbname);
   let mut store = Store::open(&dbname)?;
   let reader = BufReader::new(File::open(&filename)?);
   store.load_graph(reader, config::FORMAT, None, None)?;
